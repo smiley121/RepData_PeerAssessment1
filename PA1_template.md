@@ -1,6 +1,9 @@
 # Reproducible Research: Peer Assessment 1
 Smiley121  
-15 November 2015  
+20 December 2015  
+
+
+
 ## Introduction
 
 This is a report in response to peer assessment 1 for the Coursera Reproducible Research course.
@@ -211,7 +214,7 @@ autoplot(activity.ts)+xlab("")
 ## values (geom_path).
 ```
 
-![](PA1_template_files/figure-html/unnamed-chunk-5-1.png) 
+![](figures/unnamed-chunk-5-1.png) 
 
 Lots of NA data here, which we'll address below...
 
@@ -250,7 +253,7 @@ autoplot(activity.daily)+xlab("")
 ## (geom_path).
 ```
 
-![](PA1_template_files/figure-html/unnamed-chunk-7-1.png) 
+![](figures/unnamed-chunk-7-1.png) 
 
 ### 2. Make a histogram of the total number of steps taken each day
 
@@ -261,7 +264,7 @@ The chart above shows the number of steps each day as a time series, again note 
 ggplot(activity.daily, aes(x=steps)) + geom_histogram(binwidth=2500, colour="black", fill="white")
 ```
 
-![](PA1_template_files/figure-html/unnamed-chunk-8-1.png) 
+![](figures/unnamed-chunk-8-1.png) 
 
 ### 3. Calculate and report the mean and median of the total number of steps taken per day
 
@@ -316,7 +319,7 @@ We now plot this as a time series.
 autoplot(activity.typical.ts) + scale_x_datetime(labels = date_format("%H:%M")) + xlab("")
 ```
 
-![](PA1_template_files/figure-html/unnamed-chunk-11-1.png) 
+![](figures/unnamed-chunk-11-1.png) 
 
 ### 2. Which 5-minute interval, on average across all the days in the dataset, contains the maximum number of steps?
 
@@ -386,7 +389,7 @@ autoplot(activity.ts)+xlab("")
 ## values (geom_path).
 ```
 
-![](PA1_template_files/figure-html/unnamed-chunk-15-1.png) 
+![](figures/unnamed-chunk-15-1.png) 
 
 ### 4. Make a histogram of the total number of steps taken each day and Calculate and report the mean and median total number of steps taken per day
 
@@ -403,7 +406,7 @@ autoplot(activity.daily)
 ## (geom_path).
 ```
 
-![](PA1_template_files/figure-html/unnamed-chunk-16-1.png) 
+![](figures/unnamed-chunk-16-1.png) 
 
 The imputed values look quite plausible, which is reasurring. 
 
@@ -415,7 +418,7 @@ Getting on with the histogram now:
 ggplot(activity.daily, aes(x=filled)) + geom_histogram(binwidth=2500, colour="black", fill="white")
 ```
 
-![](PA1_template_files/figure-html/unnamed-chunk-17-1.png) 
+![](figures/unnamed-chunk-17-1.png) 
 
 Whoa. Lots of clustering in the centre there. Let's see the original data and the imputed data together for comparison. The code here is unpleasant as ggplot works better with tall rather than wide dataframes:
 
@@ -428,7 +431,7 @@ df<-rbind(df1,df2)
 ggplot(df, aes(x=steps, fill=type))+geom_histogram(binwidth=2500, colour="black", position="dodge")
 ```
 
-![](PA1_template_files/figure-html/unnamed-chunk-18-1.png) 
+![](figures/unnamed-chunk-18-1.png) 
 
 OK, so this isn't that surprising, given that our imputation strategy was to replace `NA` with the mean number of steps in that period, hence the regression to the mean here. 
 
@@ -471,17 +474,8 @@ We start by working out the average pattern for each day according to type. Note
 ```r
 activity.typical.bytype<-aggregate(steps ~ interval + daytype,activity,mean,na.rm=TRUE)
 ```
-Well the rubric says to make a panel plot the one in the repo, which means using lattice graphics. Ah well. 
 
-```r
-xyplot(activity.typical.bytype$steps ~ activity.typical.bytype$interval | activity.typical.bytype$daytype, 
-       layout = c(1, 2), type = "l", 
-       xlab = "Interval", ylab = "Number of steps")
-```
-
-![](PA1_template_files/figure-html/unnamed-chunk-22-1.png) 
-
-OK, not let's use ggplot to to do the same thing, which involves making the time series first. Note that the placement of the charts is reversed here: 
+OK, let's use ggplot rather than latice (noting that this is permitted according to the readme) to to do a panel plot comparing weekdays with weekends, which involves making the time series first.  
 
 
 ```r
@@ -492,7 +486,7 @@ activity.typical.bytype.ts<-subset(activity.typical.bytype.ts, select = -c(inter
 autoplot(activity.typical.bytype.ts) + scale_x_datetime(labels = date_format("%H:%M")) + xlab("")
 ```
 
-![](PA1_template_files/figure-html/unnamed-chunk-23-1.png) 
+![](figures/unnamed-chunk-22-1.png) 
 
 Finally, let's just look at the correlation between the weekday adn weekend patterns:
 

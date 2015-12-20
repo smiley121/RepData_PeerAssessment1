@@ -1,11 +1,17 @@
 ---
 title: "Reproducible Research: Peer Assessment 1"
 author: "Smiley121"
-date: "15 November 2015"
+date: "20 December 2015"
 output: 
   html_document:
     keep_md: true
 ---
+
+```{r setup, echo = F}
+library(knitr)
+opts_chunk$set(fig.path = "figures/")
+```
+
 ## Introduction
 
 This is a report in response to peer assessment 1 for the Coursera Reproducible Research course.
@@ -258,14 +264,8 @@ We start by working out the average pattern for each day according to type. Note
 ```{r}
 activity.typical.bytype<-aggregate(steps ~ interval + daytype,activity,mean,na.rm=TRUE)
 ```
-Well the rubric says to make a panel plot the one in the repo, which means using lattice graphics. Ah well. 
-```{r}
-xyplot(activity.typical.bytype$steps ~ activity.typical.bytype$interval | activity.typical.bytype$daytype, 
-       layout = c(1, 2), type = "l", 
-       xlab = "Interval", ylab = "Number of steps")
-```
 
-OK, not let's use ggplot to to do the same thing, which involves making the time series first. Note that the placement of the charts is reversed here: 
+OK, let's use ggplot rather than latice (noting that this is permitted according to the readme) to to do a panel plot comparing weekdays with weekends, which involves making the time series first.  
 
 ```{r}
 activity.typical.bytype.wide<-spread(activity.typical.bytype,daytype,steps)
