@@ -1,6 +1,6 @@
 # Reproducible Research: Peer Assessment 1
 Smiley121  
-20 December 2015  
+18 December 2016  
 
 
 
@@ -26,7 +26,7 @@ We make use of a number of libraries (lubridate, dplyr, ggplot2, xts, scales and
 
 ```r
 if  (!require(lubridate)) {
-  install.packages("lubridate")
+  install.packages("lubridate", repos = "http://cran.us.r-project.org")
   library(lubridate)
 }
 ```
@@ -35,26 +35,46 @@ if  (!require(lubridate)) {
 ## Loading required package: lubridate
 ```
 
+```
+## 
+## Attaching package: 'lubridate'
+```
+
+```
+## The following object is masked from 'package:base':
+## 
+##     date
+```
+
 ```r
 if  (!require(dplyr)) {
-  install.packages("dplyr")
+  install.packages("dplyr", repos = "http://cran.us.r-project.org")
   library(dplyr)
 }
 ```
 
 ```
 ## Loading required package: dplyr
+```
+
+```
 ## 
 ## Attaching package: 'dplyr'
-## 
+```
+
+```
 ## The following objects are masked from 'package:lubridate':
 ## 
 ##     intersect, setdiff, union
-## 
+```
+
+```
 ## The following objects are masked from 'package:stats':
 ## 
 ##     filter, lag
-## 
+```
+
+```
 ## The following objects are masked from 'package:base':
 ## 
 ##     intersect, setdiff, setequal, union
@@ -62,7 +82,7 @@ if  (!require(dplyr)) {
 
 ```r
 if  (!require(ggplot2)) {
-  install.packages("ggplot2")
+  install.packages("ggplot2", repos = "http://cran.us.r-project.org")
   library(ggplot2)
 }
 ```
@@ -73,24 +93,36 @@ if  (!require(ggplot2)) {
 
 ```r
 if  (!require(xts)) {
-  install.packages("xts")
+  install.packages("xts", repos = "http://cran.us.r-project.org")
   library(xts)
 }
 ```
 
 ```
 ## Loading required package: xts
+```
+
+```
 ## Loading required package: zoo
+```
+
+```
 ## 
 ## Attaching package: 'zoo'
-## 
+```
+
+```
 ## The following objects are masked from 'package:base':
 ## 
 ##     as.Date, as.Date.numeric
-## 
+```
+
+```
 ## 
 ## Attaching package: 'xts'
-## 
+```
+
+```
 ## The following objects are masked from 'package:dplyr':
 ## 
 ##     first, last
@@ -98,7 +130,7 @@ if  (!require(xts)) {
 
 ```r
 if  (!require(scales)) {
-  install.packages("scales")
+  install.packages("scales", repos = "http://cran.us.r-project.org")
   library(scales)
 }
 ```
@@ -109,7 +141,7 @@ if  (!require(scales)) {
 
 ```r
 if  (!require(tidyr)) {
-  install.packages("tidyr")
+  install.packages("tidyr", repos = "http://cran.us.r-project.org")
   library(tidyr)
 }
 ```
@@ -120,7 +152,7 @@ if  (!require(tidyr)) {
 
 ```r
 if  (!require(lattice)) {
-  install.packages("lattice")
+  install.packages("lattice", repos = "http://cran.us.r-project.org")
   library(lattice)
 }
 ```
@@ -210,11 +242,10 @@ autoplot(activity.ts)+xlab("")
 ```
 
 ```
-## Warning in loop_apply(n, do.ply): Removed 576 rows containing missing
-## values (geom_path).
+## Warning: Removed 576 rows containing missing values (geom_path).
 ```
 
-![](figures/unnamed-chunk-5-1.png) 
+![](figures/unnamed-chunk-5-1.png)<!-- -->
 
 Lots of NA data here, which we'll address below...
 
@@ -249,11 +280,10 @@ autoplot(activity.daily)+xlab("")
 ```
 
 ```
-## Warning in loop_apply(n, do.ply): Removed 2 rows containing missing values
-## (geom_path).
+## Warning: Removed 2 rows containing missing values (geom_path).
 ```
 
-![](figures/unnamed-chunk-7-1.png) 
+![](figures/unnamed-chunk-7-1.png)<!-- -->
 
 ### 2. Make a histogram of the total number of steps taken each day
 
@@ -264,7 +294,11 @@ The chart above shows the number of steps each day as a time series, again note 
 ggplot(activity.daily, aes(x=steps)) + geom_histogram(binwidth=2500, colour="black", fill="white")
 ```
 
-![](figures/unnamed-chunk-8-1.png) 
+```
+## Warning: Removed 8 rows containing non-finite values (stat_bin).
+```
+
+![](figures/unnamed-chunk-8-1.png)<!-- -->
 
 ### 3. Calculate and report the mean and median of the total number of steps taken per day
 
@@ -319,7 +353,7 @@ We now plot this as a time series.
 autoplot(activity.typical.ts) + scale_x_datetime(labels = date_format("%H:%M")) + xlab("")
 ```
 
-![](figures/unnamed-chunk-11-1.png) 
+![](figures/unnamed-chunk-11-1.png)<!-- -->
 
 ### 2. Which 5-minute interval, on average across all the days in the dataset, contains the maximum number of steps?
 
@@ -385,11 +419,10 @@ autoplot(activity.ts)+xlab("")
 ```
 
 ```
-## Warning in loop_apply(n, do.ply): Removed 576 rows containing missing
-## values (geom_path).
+## Warning: Removed 288 rows containing missing values (geom_path).
 ```
 
-![](figures/unnamed-chunk-15-1.png) 
+![](figures/unnamed-chunk-15-1.png)<!-- -->
 
 ### 4. Make a histogram of the total number of steps taken each day and Calculate and report the mean and median total number of steps taken per day
 
@@ -402,11 +435,10 @@ autoplot(activity.daily)
 ```
 
 ```
-## Warning in loop_apply(n, do.ply): Removed 2 rows containing missing values
-## (geom_path).
+## Warning: Removed 1 rows containing missing values (geom_path).
 ```
 
-![](figures/unnamed-chunk-16-1.png) 
+![](figures/unnamed-chunk-16-1.png)<!-- -->
 
 The imputed values look quite plausible, which is reasurring. 
 
@@ -418,7 +450,7 @@ Getting on with the histogram now:
 ggplot(activity.daily, aes(x=filled)) + geom_histogram(binwidth=2500, colour="black", fill="white")
 ```
 
-![](figures/unnamed-chunk-17-1.png) 
+![](figures/unnamed-chunk-17-1.png)<!-- -->
 
 Whoa. Lots of clustering in the centre there. Let's see the original data and the imputed data together for comparison. The code here is unpleasant as ggplot works better with tall rather than wide dataframes:
 
@@ -431,7 +463,11 @@ df<-rbind(df1,df2)
 ggplot(df, aes(x=steps, fill=type))+geom_histogram(binwidth=2500, colour="black", position="dodge")
 ```
 
-![](figures/unnamed-chunk-18-1.png) 
+```
+## Warning: Removed 8 rows containing non-finite values (stat_bin).
+```
+
+![](figures/unnamed-chunk-18-1.png)<!-- -->
 
 OK, so this isn't that surprising, given that our imputation strategy was to replace `NA` with the mean number of steps in that period, hence the regression to the mean here. 
 
@@ -486,7 +522,7 @@ activity.typical.bytype.ts<-subset(activity.typical.bytype.ts, select = -c(inter
 autoplot(activity.typical.bytype.ts) + scale_x_datetime(labels = date_format("%H:%M")) + xlab("")
 ```
 
-![](figures/unnamed-chunk-22-1.png) 
+![](figures/unnamed-chunk-22-1.png)<!-- -->
 
 Finally, let's just look at the correlation between the weekday adn weekend patterns:
 

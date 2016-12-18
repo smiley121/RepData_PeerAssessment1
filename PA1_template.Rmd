@@ -1,7 +1,7 @@
 ---
 title: "Reproducible Research: Peer Assessment 1"
 author: "Smiley121"
-date: "20 December 2015"
+date: "18 December 2016"
 output: 
   html_document:
     keep_md: true
@@ -33,37 +33,37 @@ We make use of a number of libraries (lubridate, dplyr, ggplot2, xts, scales and
 
 ```{r}
 if  (!require(lubridate)) {
-  install.packages("lubridate")
+  install.packages("lubridate", repos = "http://cran.us.r-project.org")
   library(lubridate)
 }
 
 if  (!require(dplyr)) {
-  install.packages("dplyr")
+  install.packages("dplyr", repos = "http://cran.us.r-project.org")
   library(dplyr)
 }
 
 if  (!require(ggplot2)) {
-  install.packages("ggplot2")
+  install.packages("ggplot2", repos = "http://cran.us.r-project.org")
   library(ggplot2)
 }
 
 if  (!require(xts)) {
-  install.packages("xts")
+  install.packages("xts", repos = "http://cran.us.r-project.org")
   library(xts)
 }
 
 if  (!require(scales)) {
-  install.packages("scales")
+  install.packages("scales", repos = "http://cran.us.r-project.org")
   library(scales)
 }
 
 if  (!require(tidyr)) {
-  install.packages("tidyr")
+  install.packages("tidyr", repos = "http://cran.us.r-project.org")
   library(tidyr)
 }
 
 if  (!require(lattice)) {
-  install.packages("lattice")
+  install.packages("lattice", repos = "http://cran.us.r-project.org")
   library(lattice)
 }
         
